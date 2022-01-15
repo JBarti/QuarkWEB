@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>title</title>
+        <link rel="stylesheet" href="{{ url_for("static", filename="home.css") }}">
+    </head>
+    <body>
+        <form action="" method="get" class="search-form">
+            <input type="text" name="game_name">
+            <button type="submit">PRETRAŽI</button>
+        </form>
+
+        <div class="games-list">
+            {% for game in games %}
+            <div class="game-container">
+                <h1>{{ game.name }}</h1>
+                <p>{{ game.price }}$</p>
+                <img src="{{ game.image_url }}" alt="">
+
+                <form action="{{ url_for("store_game") }}" method="post">
+                    <input name="game_name" class="hidden" type="text" value="{{ game.name }}">
+                    <button type="submit">Spremi</button>
+                </form>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <script src="{{ url_for("static", filename="home.js") }}"></script>
+    </body>
+
+</html>
